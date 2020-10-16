@@ -7,9 +7,13 @@ import config from '../Config/config';
 
 // global game options
 const gameOptions = {
+  platformSpeedRange: [300, 400],
   platformStartSpeed: 350,
-  spawnRange: [100, 350],
-  platformSizeRange: [50, 250],
+  spawnRange: [80, 300],
+  platformSizeRange: [90, 300],
+  platformHeightRange: [-10, 10],
+  platformHeighScale: 10,
+  platformVerticalLimit: [0.4, 0.8],
   playerGravity: 900,
   jumpForce: 400,
   playerStartPosition: 200,
@@ -23,13 +27,13 @@ export default class GameScene extends Phaser.Scene {
 
   preload() {
     // load images
-    this.load.image('player', 'assets/player.png');
+    // this.load.image('player', 'assets/player.png');
     this.load.image('logo', 'assets/logo.png');
     this.load.image('bkg', 'assets/sky.png');
     this.load.image('platform', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
-    // this.load.image('bomb', 'assets/bomb.png');
-    this.load.spritesheet('dude',
+    this.load.image('bomb', 'assets/bomb.png');
+    this.load.spritesheet('player',
       'assets/dude.png',
       { frameWidth: 32, frameHeight: 48 });
   }
@@ -56,22 +60,38 @@ export default class GameScene extends Phaser.Scene {
     // number of consecutive jumps made by the player
     this.playerJumps = 0;
 
-    // adding a platform to the game, the arguments are platform width and x position
-    this.addPlatform(config.width, config.width / 2);
+    // adding a platform to the game, the arguments are platform width, x position and y position
+    this.addPlatform(config.width, config.width / 2, config.height * gameOptions.platformVerticalLimit[1]);
 
     // adding the player;
-    this.player = this.physics.add.sprite(gameOptions.playerStartPosition, config.height / 2, 'player');
+    this.player = this.physics.add.sprite(gameOptions.playerStartPosition, config.height * 0.7, 'player');
     this.player.setGravityY(gameOptions.playerGravity);
 
+    // setting player animation
+    this.anims.create({
+      key: 'run',
+      frames: this.anims.generateFrameNumbers('player', {
+        start: 5,
+        end: 7,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
     // setting collisions between the player and the platform group
-    this.physics.add.collider(this.player, this.platformGroup);
+    this.physics.add.collider(this.player, this.platformGroup, function () {
+      // play "run" animation if the player is on a platform
+      if (!this.player.anims.isPlaying) {
+        this.player.anims.play('run');
+      }
+    }, null, this);
 
     // checking for input
     this.input.on('pointerdown', this.jump, this);
   }
 
   // the core of the script: platform are added from the pool or created on the fly
-  addPlatform(platformWidth, posX) {
+  addPlatform(platformWidth, posX, posY) {
     let platform;
     if (this.platformPool.getLength()) {
       platform = this.platformPool.getFirst();
@@ -80,9 +100,10 @@ export default class GameScene extends Phaser.Scene {
       platform.visible = true;
       this.platformPool.remove(platform);
     } else {
-      platform = this.physics.add.sprite(posX, config.height * 0.8, 'platform');
+      platform = this.physics.add.sprite(posX, posY, 'platform');
       platform.setImmovable(true);
-      platform.setVelocityX(gameOptions.platformStartSpeed * -1);
+      platform.setVelocityX(Phaser.Math.Between(gameOptions.platformSpeedRange[0], gameOptions.platformSpeedRange[1]) * -1);
+      // platform.setVelocityX(gameOptions.platformStartSpeed * -1);
       this.platformGroup.add(platform);
     }
     platform.displayWidth = platformWidth;
@@ -97,6 +118,8 @@ export default class GameScene extends Phaser.Scene {
       }
       this.player.setVelocityY(gameOptions.jumpForce * -1);
       this.playerJumps++;
+
+      this.player.anims.stop();
     }
   }
 
@@ -109,9 +132,13 @@ export default class GameScene extends Phaser.Scene {
 
     // recycling platforms
     let minDistance = config.width;
+    let rightmostPlatformHeight = 0;
     this.platformGroup.getChildren().forEach(function (platform) {
       const platformDistance = config.width - platform.x - platform.displayWidth / 2;
-      minDistance = Math.min(minDistance, platformDistance);
+      if (platformDistance < minDistance) {
+        minDistance = platformDistance;
+        rightmostPlatformHeight = platform.y;
+      }
       if (platform.x < -platform.displayWidth / 2) {
         this.platformGroup.killAndHide(platform);
         this.platformGroup.remove(platform);
@@ -121,7 +148,13 @@ export default class GameScene extends Phaser.Scene {
     // adding new platforms
     if (minDistance > this.nextPlatformDistance) {
       const nextPlatformWidth = Phaser.Math.Between(gameOptions.platformSizeRange[0], gameOptions.platformSizeRange[1]);
-      this.addPlatform(nextPlatformWidth, config.width + nextPlatformWidth / 2);
+      const platformRandomHeight = gameOptions.platformHeighScale * Phaser.Math.Between(gameOptions.platformHeightRange[0], gameOptions.platformHeightRange[1]);
+      console.log(rightmostPlatformHeight);
+      const nextPlatformGap = rightmostPlatformHeight + platformRandomHeight;
+      const minPlatformHeight = config.height * gameOptions.platformVerticalLimit[0];
+      const maxPlatformHeight = config.height * gameOptions.platformVerticalLimit[1];
+      const nextPlatformHeight = Phaser.Math.Clamp(nextPlatformGap, minPlatformHeight, maxPlatformHeight);
+      this.addPlatform(nextPlatformWidth, config.width + nextPlatformWidth / 2, nextPlatformHeight);
     }
   }
 }
