@@ -28,7 +28,7 @@ export default class GameScene extends Phaser.Scene {
     // load images
     // this.load.image('player', 'assets/player.png');
     this.load.image('forest', 'assets/forest1.jpg');
-    this.load.image('platform', 'assets/platform.png');
+    this.load.image('platform', 'assets/platy.jpeg');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
     this.load.spritesheet('player',
