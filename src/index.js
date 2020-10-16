@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable no-undef */
 import 'phaser';
 import config from './Config/config';
@@ -8,6 +9,8 @@ import TitleScene from './Scenes/TitleScene';
 import OptionsScene from './Scenes/OptionsScene';
 import CreditsScene from './Scenes/CreditsScene';
 import Model from './Model';
+
+let game;
 
 class Game extends Phaser.Game {
   constructor() {
@@ -24,4 +27,24 @@ class Game extends Phaser.Game {
   }
 }
 
-window.game = new Game();
+function resize() {
+  const canvas = document.querySelector('canvas');
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  const windowRatio = windowWidth / windowHeight;
+  const gameRatio = game.config.width / game.config.height;
+  if (windowRatio < gameRatio) {
+    canvas.style.width = `${windowWidth}px`;
+    canvas.style.height = `${windowWidth / gameRatio}px`;
+  } else {
+    canvas.style.width = `${windowHeight * gameRatio}px`;
+    canvas.style.height = `${windowHeight}px`;
+  }
+}
+
+window.onload = function () {
+  game = new Game();
+  window.focus();
+  resize();
+  window.addEventListener('resize', resize, false);
+};
