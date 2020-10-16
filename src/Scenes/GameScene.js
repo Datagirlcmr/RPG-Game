@@ -7,12 +7,11 @@ import config from '../Config/config';
 
 // global game options
 const gameOptions = {
-  platformSpeedRange: [300, 400],
-  platformStartSpeed: 350,
+  platformSpeedRange: [300, 300],
   spawnRange: [80, 300],
   platformSizeRange: [90, 300],
-  platformHeightRange: [-10, 10],
-  platformHeighScale: 10,
+  platformHeightRange: [-5, 5],
+  platformHeighScale: 20,
   platformVerticalLimit: [0.4, 0.8],
   playerGravity: 900,
   jumpForce: 400,
@@ -28,8 +27,7 @@ export default class GameScene extends Phaser.Scene {
   preload() {
     // load images
     // this.load.image('player', 'assets/player.png');
-    this.load.image('logo', 'assets/logo.png');
-    this.load.image('bkg', 'assets/sky.png');
+    this.load.image('forest', 'assets/forest1.jpg');
     this.load.image('platform', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
@@ -39,6 +37,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.add.image(400, 300, 'forest');
     // group with all active platforms.
     this.platformGroup = this.add.group({
 
@@ -149,7 +148,7 @@ export default class GameScene extends Phaser.Scene {
     if (minDistance > this.nextPlatformDistance) {
       const nextPlatformWidth = Phaser.Math.Between(gameOptions.platformSizeRange[0], gameOptions.platformSizeRange[1]);
       const platformRandomHeight = gameOptions.platformHeighScale * Phaser.Math.Between(gameOptions.platformHeightRange[0], gameOptions.platformHeightRange[1]);
-      console.log(rightmostPlatformHeight);
+      // console.log(rightmostPlatformHeight);
       const nextPlatformGap = rightmostPlatformHeight + platformRandomHeight;
       const minPlatformHeight = config.height * gameOptions.platformVerticalLimit[0];
       const maxPlatformHeight = config.height * gameOptions.platformVerticalLimit[1];
