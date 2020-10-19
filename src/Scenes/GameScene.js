@@ -41,6 +41,7 @@ const gameOptions = {
 
   // % of probability a coin appears on the platform
   coinPercent: 50,
+  firePercent: 15,
 };
 
 export default class GameScene extends Phaser.Scene {
@@ -61,6 +62,11 @@ export default class GameScene extends Phaser.Scene {
     this.load.spritesheet('coin', 'assets/coin.png', {
       frameWidth: 20,
       frameHeight: 20,
+    });
+    // the firecamp is a sprite sheet made by 32x58 pixels
+    this.load.spritesheet('fire', 'assets/fire.png', {
+      frameWidth: 40,
+      frameHeight: 70,
     });
   }
 
@@ -107,6 +113,24 @@ export default class GameScene extends Phaser.Scene {
       },
     });
 
+    // group with all active firecamps.
+    this.fireGroup = this.add.group({
+
+      // once a firecamp is removed, it's added to the pool
+      removeCallback(fire) {
+        fire.scene.firePool.add(fire);
+      },
+    });
+
+    // fire pool
+    this.firePool = this.add.group({
+
+      // once a fire is removed from the pool, it's added to the active fire group
+      removeCallback(fire) {
+        fire.scene.fireGroup.add(fire);
+      },
+    });
+
     // number of consecutive jumps made by the player so far
     this.playerJumps = 0;
 
@@ -116,6 +140,8 @@ export default class GameScene extends Phaser.Scene {
     // adding the player;
     this.player = this.physics.add.sprite(gameOptions.playerStartPosition, config.height * 0.7, 'player');
     this.player.setGravityY(gameOptions.playerGravity);
+
+    this.dying = false;
 
     // setting player animation
     this.anims.create({
@@ -137,6 +163,16 @@ export default class GameScene extends Phaser.Scene {
       }),
       frameRate: 15,
       yoyo: true,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'burn',
+      frames: this.anims.generateFrameNumbers('fire', {
+        start: 0,
+        end: 4,
+      }),
+      frameRate: 15,
       repeat: -1,
     });
 
@@ -162,6 +198,15 @@ export default class GameScene extends Phaser.Scene {
           this.coinGroup.remove(coin);
         },
       });
+    }, null, this);
+
+    // setting collisions between the player and the fire group
+    this.physics.add.overlap(this.player, this.fireGroup, function (player, fire) {
+      this.dying = true;
+      this.player.anims.stop();
+      this.player.setFrame(2);
+      this.player.body.setVelocityY(-200);
+      this.physics.world.removeCollider(this.platformCollider);
     }, null, this);
 
     // checking for input
@@ -203,11 +248,32 @@ export default class GameScene extends Phaser.Scene {
           coin.visible = true;
           this.coinPool.remove(coin);
         } else {
-          const coin = this.physics.add.sprite(posX, posY - 66, 'coin');
+          const coin = this.physics.add.sprite(posX, posY - 26, 'coin');
           coin.setImmovable(true);
           coin.setVelocityX(platform.body.velocity.x);
           coin.anims.play('rotate');
           this.coinGroup.add(coin);
+        }
+      }
+
+      // is there a fire over the platform?
+      if (Phaser.Math.Between(1, 100) <= gameOptions.firePercent) {
+        if (this.firePool.getLength()) {
+          const fire = this.firePool.getFirst();
+          fire.x = posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth);
+          fire.y = posY - 46;
+          fire.alpha = 1;
+          fire.active = true;
+          fire.visible = true;
+          this.firePool.remove(fire);
+        } else {
+          const fire = this.physics.add.sprite(posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth), posY - 46, 'fire');
+          fire.setImmovable(true);
+          fire.setVelocityX(platform.body.velocity.x);
+          fire.setSize(8, 2, true);
+          fire.anims.play('burn');
+          fire.setDepth(2);
+          this.fireGroup.add(fire);
         }
       }
     }
@@ -215,7 +281,7 @@ export default class GameScene extends Phaser.Scene {
 
   // the player jumps when on the ground, or once in the air as long as there are jumps left and the first jump was on the ground
   jump() {
-    if (this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps)) {
+    if ((!this.dying) && (this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps))) {
       if (this.player.body.touching.down) {
         this.playerJumps = 0;
       }
@@ -253,6 +319,14 @@ export default class GameScene extends Phaser.Scene {
       if (coin.x < -coin.displayWidth / 2) {
         this.coinGroup.killAndHide(coin);
         this.coinGroup.remove(coin);
+      }
+    }, this);
+
+    // recycling fire
+    this.fireGroup.getChildren().forEach(function (fire) {
+      if (fire.x < -fire.displayWidth / 2) {
+        this.fireGroup.killAndHide(fire);
+        this.fireGroup.remove(fire);
       }
     }, this);
 
