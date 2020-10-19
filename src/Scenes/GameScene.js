@@ -293,6 +293,16 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
+    const cursorKey = this.input.keyboard.createCursorKeys();
+    const didPressJump = Phaser.Input.Keyboard.JustDown(cursorKey.up);
+
+    if (didPressJump && (this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps))) {
+      if (this.player.body.touching.down) {
+        this.playerJumps = 0;
+      }
+      this.player.setVelocityY(gameOptions.jumpForce * -1);
+      this.playerJumps++;
+    }
     // game over
     if (this.player.y > config.height) {
       this.scene.start('Game');
