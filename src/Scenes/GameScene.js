@@ -19,7 +19,7 @@ const gameOptions = {
   platformSizeRange: [90, 300],
 
   // a height range between rightmost platform and next platform to be spawned
-  platformHeightRange: [-5, 5],
+  platformHeightRange: [-5, 2],
 
   // a scale to be multiplied by platformHeightRange
   platformHeighScale: 20,
