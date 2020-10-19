@@ -40,7 +40,7 @@ const gameOptions = {
   jumps: 2,
 
   // % of probability a coin appears on the platform
-  coinPercent: 25,
+  coinPercent: 50,
 };
 
 export default class GameScene extends Phaser.Scene {
@@ -57,7 +57,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('bomb', 'assets/bomb.png');
     this.load.spritesheet('player',
       'assets/dude.png',
-      { frameWidth: 24, frameHeight: 48 });
+      { frameWidth: 32, frameHeight: 48 });
     this.load.spritesheet('coin', 'assets/coin.png', {
       frameWidth: 20,
       frameHeight: 20,
