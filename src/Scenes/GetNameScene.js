@@ -17,7 +17,7 @@ export default class GetNameScene extends Phaser.Scene {
 
   create() {
     this.add.image(400, 300, 'background');
-    this.model = this.sys.game.globals.model;
+    const { model } = this.sys.game.globals;
     this.title = this.add.text(0, 0, 'Please enter your name', { fontSize: '52px', fill: '#000' });
     this.zone = this.add.zone(config.width / 2, config.height / 2, config.width, config.height);
     this.form = this.add.dom(400, 300).createFromHTML(getName, 'div');
