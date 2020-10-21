@@ -15,9 +15,9 @@ export default class CreditsScene extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(400, 300, 'background');
-    this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '52px', fill: '#000' });
-    this.madeByText = this.add.text(0, 0, 'Designed by: Selma Ndi(DataGirl)', { fontSize: '36px', fill: '#000' });
+    // this.add.image(400, 300, 'background');
+    this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '52px', fill: '#fff' });
+    this.madeByText = this.add.text(0, 0, 'Designed by: Selma Ndi(DataGirl)', { fontSize: '36px', fill: '#fff' });
     this.zone = this.add.zone(config.width / 2, config.height / 2, config.width, config.height);
 
     Phaser.Display.Align.In.Center(

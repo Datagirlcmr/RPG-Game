@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
 import 'phaser';
 import 'regenerator-runtime';
@@ -8,8 +9,8 @@ export default class GameOverScene extends Phaser.Scene {
     super('Over');
   }
 
-  //   preload() {
-  //   }
+  preload() {
+  }
 
   create() {
     this.model = this.sys.game.globals.model;
@@ -23,7 +24,7 @@ export default class GameOverScene extends Phaser.Scene {
     this.zone = this.add.zone(width / 2, height / 2, width, height);
     this.homeButton = new Button(this, 150, 500, 'blueButton1', 'blueButton2', 'Home', 'Title');
     this.restartButton = new Button(this, 650, 500, 'blueButton1', 'blueButton2', 'Restart', 'Game');
-    if (score.split(':')[1] > 0 && localStorage.getItem('scoreSaved') === 'false') {
+    if (localStorage.getItem('scoreSaved') === 'false') {
       const response = this.scoreBoard.newScore();
       response.then(() => {
         this.getScoreBoardData();

@@ -1,13 +1,19 @@
 /* eslint-disable no-undef */
 import 'phaser';
 import Button from '../Objects/Button';
+import background from '../assets/forest1.jpg';
 
 export default class OptionsScene extends Phaser.Scene {
   constructor() {
     super('Options');
   }
 
+  preload() {
+    this.load.image('background', background);
+  }
+
   create() {
+    // this.add.image(400, 300, 'background');
     this.model = this.sys.game.globals.model;
 
     this.text = this.add.text(300, 100, 'Options', { fontSize: 40 });

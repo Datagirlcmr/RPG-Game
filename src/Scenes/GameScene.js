@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-unused-vars */
 /* eslint-disable func-names */
 /* eslint-disable max-len */
@@ -10,6 +11,7 @@ import platform from '../assets/platy.jpeg';
 import player from '../assets/dude.png';
 import coin from '../assets/coin.png';
 import fire from '../assets/fire.png';
+import GameOverScene from './GameOverScene';
 
 // global game options
 const gameOptions = {
@@ -49,6 +51,9 @@ const gameOptions = {
   firePercent: 15,
 };
 
+let score = 0;
+let scoreText;
+
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -74,6 +79,8 @@ export default class GameScene extends Phaser.Scene {
   create() {
     // loading the background
     this.add.image(400, 300, 'forest');
+
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
     // keeping track of added platforms
     this.addedPlatforms = 0;
@@ -197,6 +204,7 @@ export default class GameScene extends Phaser.Scene {
         onComplete() {
           this.coinGroup.killAndHide(coin);
           this.coinGroup.remove(coin);
+          this.collectStar(player, coin);
         },
       });
     }, null, this);
@@ -280,6 +288,13 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
+  collectStar(player, star) {
+    star.disableBody(true, true);
+
+    score += 3;
+    scoreText.setText(`Score: ${score}`);
+  }
+
   // the player jumps when on the ground, or once in the air as long as there are jumps left and the first jump was on the ground
   jump() {
     if ((!this.dying) && (this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps))) {
@@ -307,6 +322,7 @@ export default class GameScene extends Phaser.Scene {
     // game over
     if (this.player.y > config.height) {
       this.scene.start('Game');
+      this.scene.start('Over');
     }
     this.player.x = gameOptions.playerStartPosition;
 

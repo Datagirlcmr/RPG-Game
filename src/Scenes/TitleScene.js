@@ -4,13 +4,19 @@
 import 'phaser';
 import config from '../Config/config';
 import Button from '../Objects/Button';
+import background from '../assets/forest1.jpg';
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
     super('Title');
   }
 
+  preload() {
+    this.load.image('background', background);
+  }
+
   create() {
+    this.add.image(400, 300, 'background');
     // Game
     this.gameButton = new Button(this, config.width / 2, config.height / 2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Game');
 
