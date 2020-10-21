@@ -4,9 +4,9 @@
   "description": "A Phaser 3 Game",
   "main": "src/index.js",
   "scripts": {
-    "build": "webpack",
-    "start": "npm run build && webpack-dev-server --port=8000",
-    "heroku-postbuild": "webpack --config webpack.prod.js" 
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development",
+    "start": "npm run build && webpack-dev-server --port=8000"
   },
   "repository": {
     "type": "git",
