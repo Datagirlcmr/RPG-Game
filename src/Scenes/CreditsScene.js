@@ -1,3 +1,5 @@
+/* eslint-disable func-names */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
 import 'phaser';
 import config from '../Config/config';
@@ -7,9 +9,14 @@ export default class CreditsScene extends Phaser.Scene {
     super('Credits');
   }
 
+  preload() {
+    this.load.image('background', 'assets/forest1.jpg');
+  }
+
   create() {
-    this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
-    this.madeByText = this.add.text(0, 0, 'Created By: Placeholder', { fontSize: '26px', fill: '#fff' });
+    this.add.image(400, 300, 'background');
+    this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '52px', fill: '#000' });
+    this.madeByText = this.add.text(0, 0, 'Designed by: Selma Ndi(DataGirl)', { fontSize: '36px', fill: '#000' });
     this.zone = this.add.zone(config.width / 2, config.height / 2, config.width, config.height);
 
     Phaser.Display.Align.In.Center(
