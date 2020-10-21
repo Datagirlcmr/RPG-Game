@@ -3,6 +3,7 @@
 /* eslint-disable no-undef */
 import 'phaser';
 import config from '../Config/config';
+import background from '../assets/forest1.jpg';
 
 export default class CreditsScene extends Phaser.Scene {
   constructor() {
@@ -10,7 +11,7 @@ export default class CreditsScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('background', 'assets/forest1.jpg');
+    this.load.image('background', background);
   }
 
   create() {

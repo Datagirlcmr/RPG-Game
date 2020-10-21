@@ -5,6 +5,11 @@
 /* eslint-disable no-undef */
 import 'phaser';
 import config from '../Config/config';
+import forest from '../assets/forest1.jpg';
+import platform from '../assets/platy.jpeg';
+import player from '../assets/dude.png';
+import coin from '../assets/coin.png';
+import fire from '../assets/fire.png';
 
 // global game options
 const gameOptions = {
@@ -50,19 +55,17 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    // load images
-    // this.load.image('player', 'assets/player.png');
-    this.load.image('forest', 'assets/forest1.jpg');
-    this.load.image('platform', 'assets/platy.jpeg');
+    this.load.image('forest', forest);
+    this.load.image('platform', platform);
     this.load.spritesheet('player',
-      'assets/dude.png',
+      player,
       { frameWidth: 32, frameHeight: 48 });
-    this.load.spritesheet('coin', 'assets/coin.png', {
+    this.load.spritesheet('coin', coin, {
       frameWidth: 20,
       frameHeight: 20,
     });
     // the firecamp is a sprite sheet made by 32x58 pixels
-    this.load.spritesheet('fire', 'assets/fire.png', {
+    this.load.spritesheet('fire', fire, {
       frameWidth: 40,
       frameHeight: 70,
     });

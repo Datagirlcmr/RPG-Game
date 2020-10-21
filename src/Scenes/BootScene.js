@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import 'phaser';
+import phaserLogo from '../assets/logo.png';
 
 export default class BootScene extends Phaser.Scene {
   constructor() {
@@ -7,7 +8,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('logo', 'assets/logo.png');
+    this.load.image('logo', phaserLogo);
   }
 
   create() {
