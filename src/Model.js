@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 export default class Model {
   constructor() {
-    this._soundOn = true;
-    this._musicOn = true;
-    this._bgMusicPlaying = false;
-    this.scoreCount = 0;
+    this.sound = true;
+    this.music = true;
+    this.bgMusicPl = false;
+    this.sc = 0;
     this.userNa = 'no name';
     this.leader = false;
     localStorage.setItem('userName', 'no name');
@@ -35,12 +35,12 @@ export default class Model {
   }
 
   set score(value) {
-    this.scoreCount = value;
+    this.sc = value;
     localStorage.setItem('score', value);
   }
 
   get score() {
-    return this.scoreCount;
+    return this.sc;
   }
 
   set userName(value) {

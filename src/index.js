@@ -10,7 +10,7 @@ import OptionsScene from './Scenes/OptionsScene';
 import CreditsScene from './Scenes/CreditsScene';
 import GetNameScene from './Scenes/GetNameScene';
 import GameOverScene from './Scenes/GameOverScene';
-import LeaderBoard from './Modules/LeaderBoard';
+import ScoreBoard from './Modules/ScoreBoard';
 import Model from './Model';
 
 let game;
@@ -19,8 +19,8 @@ class Game extends Phaser.Game {
   constructor() {
     super(config);
     const model = new Model();
-    const leaderBoard = new LeaderBoard();
-    this.globals = { model, bgMusic: null, leaderBoard };
+    const sB = new ScoreBoard();
+    this.globals = { model, bgMusic: null, sB };
     this.scene.add('Boot', BootScene);
     this.scene.add('Preloader', PreloaderScene);
     this.scene.add('Input', GetNameScene);

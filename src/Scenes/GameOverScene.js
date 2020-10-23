@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
 import 'phaser';
 import 'regenerator-runtime';
@@ -9,17 +8,17 @@ export default class GameOverScene extends Phaser.Scene {
     super('Over');
   }
 
-  preload() {
-  }
+  // preload() {
+  // }
 
   create() {
     this.model = this.sys.game.globals.model;
-    this.scoreBoard = this.sys.game.globals.leaderBoard;
+    this.scoreBoard = this.sys.game.globals.sB;
     const { score } = this.model;
     const { width } = this.cameras.main;
     const { height } = this.cameras.main;
     this.gameOverText = this.add.text(0, 0, 'Game Over', { fontSize: '52px', fill: '#f00' });
-    this.finalScoreTitle = this.add.text(0, 0, 'Time survived:', { fontSize: '34px', fill: '#fff' });
+    this.finalScoreTitle = this.add.text(0, 0, 'Your Score:', { fontSize: '34px', fill: '#fff' });
     this.finalScore = this.add.text(0, 0, `${score}`, { fontSize: '30px', fill: '#fff' });
     this.zone = this.add.zone(width / 2, height / 2, width, height);
     this.homeButton = new Button(this, 150, 500, 'blueButton1', 'blueButton2', 'Home', 'Title');

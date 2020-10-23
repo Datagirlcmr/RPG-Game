@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import 'regenerator-runtime';
 
-export default class LeaderBoard {
+export default class ScoreBoard {
   constructor() {
     this.data = true;
   }
