@@ -11,11 +11,10 @@ module.exports = {
     filename: 'project.bundle.js',
   },
 
-  devServer: {
-    contentBase: path.join(__dirname, 'build'),
-    compress: true,
-    port: 9000,
-  },
+  // devServer: {
+  //   contentBase: path.join(__dirname, 'build'),
+  //   compress: true,
+  // },
 
   module: {
     rules: [
