@@ -71,17 +71,19 @@ export default class GameOverScene extends Phaser.Scene {
     const listTable = document.createElement('table');
     listTable.id = 'leaderboad';
     listTable.style.color = '#000 ';
-    listTable.style.maxHeight = '300px';
-    listTable.style.width = '240px';
+    listTable.style.maxHeight = '400px';
+    listTable.style.width = '350px';
     listTable.style.overflowX = 'scroll';
     listTable.style.borderCollapse = 'collapse';
     listTable.style.background = '#fff';
     const firstTr = document.createElement('tr');
     const nameTitle = document.createElement('th');
     nameTitle.style.paddingRight = '10px';
-    nameTitle.style.width = '50%';
+    nameTitle.style.width = '150px';
     const scoreTitle = document.createElement('th');
-    scoreTitle.style.width = '50%';
+    scoreTitle.style.width = '150px';
+    nameTitle.style.fontSize = '30px';
+    scoreTitle.style.fontSize = '30px';
     nameTitle.innerHTML = 'Name';
     scoreTitle.innerHTML = 'Score';
     firstTr.appendChild(nameTitle);
@@ -90,14 +92,14 @@ export default class GameOverScene extends Phaser.Scene {
     for (let i = 0; i < data.length; i += 1) {
       const tempTr = document.createElement('tr');
       if (i % 2 === 0) {
-        tempTr.style.background = '#dddddd';
+        tempTr.style.background = '#f2f2f2';
       }
       const firstTd = document.createElement('td');
       firstTd.style.paddingRight = '10px';
       firstTd.style.textAlign = 'center';
-      firstTd.style.width = '50%';
+      firstTd.style.fontSize = '30px';
       const secondTd = document.createElement('td');
-      secondTd.style.width = '50%';
+      secondTd.style.fontSize = '30px';
       secondTd.style.textAlign = 'center';
       firstTd.innerHTML = data[i].user;
       secondTd.innerHTML = data[i].score;

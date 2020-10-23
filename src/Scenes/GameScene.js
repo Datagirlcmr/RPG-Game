@@ -46,7 +46,7 @@ export default class GameScene extends Phaser.Scene {
     localStorage.setItem('scoreSaved', false);
     this.model = this.sys.game.globals.model;
     this.score = 0;
-    this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#cb5354' });
     this.addedPlatforms = 0;
     this.platformGroup = this.add.group({
       removeCallback(platform) {

@@ -3,7 +3,6 @@
 /* eslint-disable no-undef */
 import 'phaser';
 import getName from '../assets/html/getName.html';
-import config from '../Config/config';
 import background from '../assets/forest1.jpg';
 
 export default class GetNameScene extends Phaser.Scene {
@@ -18,9 +17,8 @@ export default class GetNameScene extends Phaser.Scene {
   create() {
     this.add.image(400, 300, 'background');
     const { model } = this.sys.game.globals;
-    this.title = this.add.text(0, 0, 'Please enter your name', { fontSize: '52px', fill: '#000' });
-    this.zone = this.add.zone(config.width / 2, config.height / 2, config.width, config.height);
-    this.form = this.add.dom(400, 300).createFromHTML(getName, 'div');
+    this.title = this.add.text(150, 100, 'Please enter your name', { fontSize: '42px', fill: '#283021', fontWeight: 'bolder' });
+    this.form = this.add.dom(300, 250).createFromHTML(getName, 'div');
     this.form.addListener('click');
     this.form.on('click', function (event) {
       if (event.target.name === 'setNameButton') {
@@ -32,11 +30,7 @@ export default class GetNameScene extends Phaser.Scene {
         }
       }
     });
-    Phaser.Display.Align.In.Center(
-      this.title,
-      this.zone,
-    );
-    this.title.setY(80);
+
     this.model = this.sys.game.globals.model;
     if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
       this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });

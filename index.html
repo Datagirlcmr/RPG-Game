@@ -1,9 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <body>
-        <script src="build/project.bundle.js" charset="utf-8"></script>
-    </body>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        .main {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .game {
+            width: 70%;
+        }
+
+        .instructions {
+            width: 30%;
+            justify-content: flex-end;
+            background-color: #f2f2f2;
+        }
+
+        @media screen and (max-width: 700px) {
+            .main {
+                display: flex;
+                flex-direction: column;
+            }
+            .instructions {
+            width: 70%;
+            justify-content: center;
+            background-color: #f2f2f2;
+            margin: auto;
+        }
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class='game' id='phaser-example'></div>
+        <div class="instructions">
+            <h1>Instructions</h1>
+            <p>- Jump from platform to platform </p>
+            <p>- If you fall off the platform, you loose </p>
+            <p>- Avoid the fire, if you touch it .. Game Over</p>
+            <p> - You get scores by collecting coins</p>
+            <p> - Your score is displayed in the top left corner of the screen</p>
+            <p> - Try to survive as long as you can!</p>
+
+        </div>
+    </div>
+    <script src="build/project.bundle.js" charset="utf-8"></script>
+</body>
+
 </html>

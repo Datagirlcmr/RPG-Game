@@ -14,7 +14,6 @@ import ScoreBoard from './Modules/ScoreBoard';
 import Model from './Model';
 
 let game;
-
 class Game extends Phaser.Game {
   constructor() {
     super(config);
