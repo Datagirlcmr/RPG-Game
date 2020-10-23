@@ -43,6 +43,7 @@ export default class GameScene extends Phaser.Scene {
   create() {
     this.add.image(400, 300, 'forest');
 
+    localStorage.setItem('scoreSaved', false);
     this.model = this.sys.game.globals.model;
     this.score = 0;
     this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
