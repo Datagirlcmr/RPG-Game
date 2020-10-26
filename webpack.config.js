@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 const webpack = require('webpack');
 const path = require('path');
 
@@ -43,7 +44,7 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimization.Minimize(),
+    new webpack.optimization.minimize(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
