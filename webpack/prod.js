@@ -6,6 +6,7 @@ const base = require('./base');
 
 module.exports = merge(base, {
   mode: 'production',
+  entry: './src/index.js',
   output: {
     filename: 'bundle.min.js',
   },
