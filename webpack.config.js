@@ -44,7 +44,7 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimization.minimize(),
+    new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
