@@ -7,7 +7,7 @@ import blueButton2 from '../assets/ui/blue_button03.png';
 import phaserLogo from '../assets/logo.png';
 import box from '../assets/ui/grey_box.png';
 import checkedBox from '../assets/ui/blue_boxCheckmark.png';
-import bgMusic from '../assets/audio/TownTheme.mp3';
+import bgMusic from '../assets/audio/theme.mp3';
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
