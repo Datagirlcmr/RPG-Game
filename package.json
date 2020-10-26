@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npm run build && webpack-dev-server --port=8000",
     "build": "webpack",
+    "dev": "run webpack -- --mode development --watch",
     "test": "jest"
   },
   "repository": {
