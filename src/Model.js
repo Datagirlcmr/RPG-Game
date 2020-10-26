@@ -11,27 +11,27 @@ export default class Model {
   }
 
   set musicOn(value) {
-    this._musicOn = value;
+    this.music = value;
   }
 
   get musicOn() {
-    return this._musicOn;
+    return this.music;
   }
 
   set soundOn(value) {
-    this._soundOn = value;
+    this.sound = value;
   }
 
   get soundOn() {
-    return this._soundOn;
+    return this.sound;
   }
 
   set bgMusicPlaying(value) {
-    this._bgMusicPlaying = value;
+    this.bgMusicPl = value;
   }
 
   get bgMusicPlaying() {
-    return this._bgMusicPlaying;
+    return this.bgMusicPl;
   }
 
   set score(value) {
