@@ -4,8 +4,8 @@
   "description": "A Phaser 3 Game",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "build": "webpack --mode production",
+    "build": "webpack --config webpack/prod.js ",
+    "start": "webpack-dev-server --config webpack/base.js --open",
     "dev": "webpack --mode development",
     "test": "jest"
   },
@@ -20,11 +20,11 @@
   },
   "homepage": "https://github.com/Datagirlcmr/Phaser-RPG-Game#readme",
   "devDependencies": {
-    "babel-loader": "^8.1.0",
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
