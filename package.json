@@ -5,8 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "npm run build && webpack-dev-server --port=8000",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
+    "dev": "webpack",
     "test": "jest"
   },
   "repository": {
