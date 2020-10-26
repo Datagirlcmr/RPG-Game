@@ -72,7 +72,7 @@ export default class GameOverScene extends Phaser.Scene {
     listTable.id = 'leaderboad';
     listTable.style.color = '#000 ';
     listTable.style.maxHeight = '400px';
-    listTable.style.width = '300px';
+    listTable.style.width = '280px';
     listTable.style.overflowX = 'scroll';
     listTable.style.borderCollapse = 'collapse';
     listTable.style.background = '#fff';

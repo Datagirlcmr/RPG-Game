@@ -1,6 +1,6 @@
 # Phaser 3 Game: PocoPoco
 
-PocoPoco is an HTML5 plarform game where you collect coins and dodge fires  while jumping from one platform to another. Built with Phaser 3.
+PocoPoco is an HTML5 plartform game where you collect coins and dodge fires  while jumping from one platform to another. Built with Phaser 3.
 
 A Phaser 3 project with ES6 support via [Babel 7](https://babeljs.io/) and [Webpack 4](https://webpack.js.org/)
 that includes hot-reloading for development and production-ready builds.
