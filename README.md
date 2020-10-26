@@ -35,7 +35,7 @@ Whenever the player picks a coin, the score is automatically added to him. A pla
  - Stop/Start Game Sound
  - Display scores for other players
  - Score the player when he collects coins
- 
+ - Double jump 
 
 ## Built With 
 
