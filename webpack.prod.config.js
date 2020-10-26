@@ -10,7 +10,7 @@ config.plugins.push(
 );
 
 config.plugins.push(
-  new webpack.optimize.UglifyJsPlugin({
+  new webpack.optimization.Minimize({
     compress: {
       warnings: false,
     },
