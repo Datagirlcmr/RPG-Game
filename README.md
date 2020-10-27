@@ -8,15 +8,12 @@ that includes hot-reloading for development and production-ready builds.
 
 [Explore the Docs](https://github.com/Datagirlcmr/RPG-Game/tree/features) 
 
-[TOC]
-
-
 
 ## About the Game
 
 HTML5 plarform game where you collect coins and dodge fires  while jumping from one platform to another. Built with Phaser 3.
 
-[Live Version ](https://github.com/Datagirlcmr/RPG-Game/tree/features) 
+[Live Version ](https://fathomless-cove-37944.herokuapp.com/) 
 
 [Explore the Docs](https://github.com/Datagirlcmr/RPG-Game/tree/features) 
 
@@ -86,7 +83,7 @@ Whenever the player picks a coin, the score is automatically added to him. A pla
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/Datagirlcmr/steps-tracker/issues).
+Feel free to check the [issues page](https://github.com/Datagirlcmr/RPG-Game/issues).
 
 ## Show your support
 
