@@ -9,12 +9,12 @@ config.plugins.push(
   }),
 );
 
-config.plugins.push(
-  config.optimization.minimize({
-    compress: {
-      warnings: false,
-    },
-  }),
-);
+// config.plugins.push(
+//   config.optimization.minimize({
+//     compress: {
+//       warnings: false,
+//     },
+//   }),
+// );
 
 module.exports = config;
